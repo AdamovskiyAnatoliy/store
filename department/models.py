@@ -22,16 +22,17 @@ class Product(models.Model):
     def __str__(self):
         return self.name_product
 
-class Seller(models.Model):
+
+class User(models.Model):
+    ban = models.BooleanField(default=False)
     pub_product = models.ForeignKey(Product, on_delete=models.CASCADE)
     rating = models.DecimalField(max_digits=4, decimal_places=2)
     phone_number = models.PositiveIntegerField(blank=True)
 
-
-class User(models.Model):
-    ban = models.BooleanField(default=False)
-    desire = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True)
-    seller = models.OneToOneField(Seller, on_delete=models.CASCADE, blank=True)
-
     def cost_of_desires(self):
         pass
+
+    def up_user_rating(self):
+        self.rating =+ 1
+        self.save()
+        return ''
