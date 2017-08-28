@@ -36,3 +36,11 @@ class User(models.Model):
         self.rating =+ 1
         self.save()
         return ''
+
+class Comment(models.Model):
+    create_comment_date = models.DateTimeField(default=timezone.now)
+    text_comment = models.TextField()
+    author_comment = models.ForeignKey('auth.User')
+
+    def __str__(self):
+        return self.text_comment
